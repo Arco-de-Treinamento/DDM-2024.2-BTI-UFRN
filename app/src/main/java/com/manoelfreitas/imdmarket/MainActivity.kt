@@ -14,10 +14,10 @@ import kotlinx.coroutines.delay
 import com.manoelfreitas.imdmarket.ui.screen.splash.SplashScreen
 import com.manoelfreitas.imdmarket.ui.screen.auth.login.LoginScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.menu.MenuScreen
-import com.manoelfreitas.imdmarket.ui.screen.main.item.additem.AddItemScreen
-import com.manoelfreitas.imdmarket.ui.screen.main.item.edititem.EditItemScreen
-import com.manoelfreitas.imdmarket.ui.screen.main.item.deleteitem.DeleteItemScreen
-import com.manoelfreitas.imdmarket.ui.screen.main.item.listitems.ListItemScreen
+import com.manoelfreitas.imdmarket.ui.screen.main.product.addproduct.AddProductScreen
+import com.manoelfreitas.imdmarket.ui.screen.main.product.editproduct.EditProductScreen
+import com.manoelfreitas.imdmarket.ui.screen.main.product.deleteproduct.DeleteProductScreen
+import com.manoelfreitas.imdmarket.ui.screen.main.product.listproducts.ListProductScreen
 import com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword.ForgotPasswordScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -55,16 +55,16 @@ fun AppNavigation() {
             MenuScreen(navController)
         }
         composable("additem"){
-            AddItemScreen(navController)
+            AddProductScreen(navController)
         }
         composable("edititem"){
-            EditItemScreen(navController)
+            EditProductScreen(navController)
         }
         composable("deleteitem"){
-            DeleteItemScreen(navController)
+            DeleteProductScreen(navController)
         }
         composable("listitems"){
-            ListItemScreen(navController)
+            ListProductScreen(navController)
         }
         composable("forgotpassword"){
             ForgotPasswordScreen(navController)

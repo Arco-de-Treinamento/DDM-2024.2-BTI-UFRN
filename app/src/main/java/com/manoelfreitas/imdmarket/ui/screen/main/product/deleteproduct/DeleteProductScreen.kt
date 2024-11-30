@@ -1,5 +1,6 @@
-package com.manoelfreitas.imdmarket.ui.screen.main.item.deleteitem
+package com.manoelfreitas.imdmarket.ui.screen.main.product.deleteproduct
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,11 +16,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-
+import com.manoelfreitas.imdmarket.ui.screen.main.product.productViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DeleteItemScreen(navController: NavController){
+fun DeleteProductScreen(navController: NavController){
     var productCode: Int? by remember {(mutableStateOf(0))}
     val context = LocalContext.current
 
@@ -69,19 +70,10 @@ fun DeleteItemScreen(navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
                     onClick = {
-                        if(productCode != null) {
-                            Toast.makeText(
-                                context,
-                                "Item deletado com sucesso!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }else {
-                            Toast.makeText(
-                                context,
-                                "Informe o código do produto!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                        deleteProduct(
+                            context = context,
+                            productCode = productCode
+                        )
                     }) {
                     Text("Deletar")
                 }
@@ -93,5 +85,24 @@ fun DeleteItemScreen(navController: NavController){
                 }
             }
         }
+    }
+}
+
+
+fun deleteProduct(context: Context, productCode: Int?) {
+    if(productCode != null) {
+        productViewModel().deleteProduct(productCode)
+
+        Toast.makeText(
+            context,
+            "Item removido com sucesso!",
+            Toast.LENGTH_SHORT
+        ).show()
+    }else {
+        Toast.makeText(
+            context,
+            "Informe o código do produto!",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

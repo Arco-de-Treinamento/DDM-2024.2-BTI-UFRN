@@ -1,5 +1,4 @@
-package com.manoelfreitas.imdmarket.ui.screen.main.item.listitems
-
+package com.manoelfreitas.imdmarket.ui.screen.main.product.listproducts
 
 import android.content.Context
 import android.widget.Toast
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun ListItemScreen(navController: NavController){
+fun ListProductScreen(navController: NavController){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()

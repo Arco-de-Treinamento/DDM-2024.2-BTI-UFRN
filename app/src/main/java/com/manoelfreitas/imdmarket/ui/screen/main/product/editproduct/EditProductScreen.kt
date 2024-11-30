@@ -16,7 +16,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.screen.main.product.productViewModel
+import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
 import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
 
 
@@ -43,7 +43,6 @@ fun EditProductScreen(navController: NavController){
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-
                 colors = TopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -109,10 +108,10 @@ fun EditProductScreen(navController: NavController){
                     Text("Alterar")
                 }
                 Button(onClick = {
-                    productCode = null
-                    productName = null
-                    productDescription = null
-                    productQuantity = null
+                    productCode = 0
+                    productName = ""
+                    productDescription = ""
+                    productQuantity = 0
                 },
                 ) {
                     Text("Limpar")
@@ -134,7 +133,7 @@ fun editProduct(context: Context, productCode: Int?, productName: String?, produ
             productQuantity = productQuantity
         )
 
-        productViewModel().editProduct(_product)
+        ProductViewModel().editProduct(_product, context)
 
         Toast.makeText(
             context,

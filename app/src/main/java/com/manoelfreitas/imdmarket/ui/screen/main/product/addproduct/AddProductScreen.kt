@@ -15,9 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.ui.screen.main.product.productViewModel
 import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
+import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,6 +30,7 @@ fun AddProductScreen(navController: NavController){
     var productQuantity: Int? by remember {(mutableStateOf(0))}
 
     val context = LocalContext.current
+    val productViewModel: ProductViewModel = viewModel()
 
     Scaffold (
         modifier = Modifier
@@ -99,6 +101,7 @@ fun AddProductScreen(navController: NavController){
                     onClick = {
                         addProduct(
                             context = context,
+                            productViewModel = productViewModel,
                             productCode = productCode,
                             productName = productName,
                             productDescription = productDescription,
@@ -108,10 +111,10 @@ fun AddProductScreen(navController: NavController){
                     Text("Cadastrar")
                 }
                 Button(onClick = {
-                    productCode = null
-                    productName = null
-                    productDescription = null
-                    productQuantity = null
+                    productCode = 0
+                    productName = ""
+                    productDescription = ""
+                    productQuantity = 0
                 },
                 ) {
                     Text("Limpar")
@@ -121,7 +124,9 @@ fun AddProductScreen(navController: NavController){
     }
 }
 
-fun addProduct(context: Context, productCode: Int?, productName: String?, productDescription: String?, productQuantity: Int?) {
+fun addProduct(context: Context, productViewModel: ProductViewModel,
+               productCode: Int?, productName: String?,
+               productDescription: String?, productQuantity: Int?) {
     if(productCode != null && productName != null &&
         productDescription != null && productQuantity != null) {
 
@@ -132,7 +137,7 @@ fun addProduct(context: Context, productCode: Int?, productName: String?, produc
             productQuantity = productQuantity
         )
 
-        productViewModel().addProduct(_product)
+        productViewModel.addProduct(_product, context)
 
         Toast.makeText(
             context,

@@ -16,7 +16,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.screen.main.product.productViewModel
+import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,7 +78,7 @@ fun DeleteProductScreen(navController: NavController){
                     Text("Deletar")
                 }
                 Button(onClick = {
-                    productCode = null
+                    productCode = 0
                 },
                 ) {
                     Text("Limpar")
@@ -91,7 +91,7 @@ fun DeleteProductScreen(navController: NavController){
 
 fun deleteProduct(context: Context, productCode: Int?) {
     if(productCode != null) {
-        productViewModel().deleteProduct(productCode)
+        ProductViewModel().deleteProduct(productCode)
 
         Toast.makeText(
             context,

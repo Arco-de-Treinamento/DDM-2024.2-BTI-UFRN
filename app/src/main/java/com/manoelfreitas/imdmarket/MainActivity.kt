@@ -19,7 +19,8 @@ import com.manoelfreitas.imdmarket.ui.screen.main.item.edititem.EditItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.item.deleteitem.DeleteItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.item.listitems.ListItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword.ForgotPasswordScreen
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -80,5 +81,14 @@ fun NavController.navigateToLogin(){
 fun NavController.navigateToMenu(){
     navigate("menu"){
         popUpTo("login"){inclusive = true}
+    }
+}
+
+fun NavController.returnToLogin(scope: CoroutineScope){
+    scope.launch {
+        delay(2000)
+        navigate("login"){
+            popUpTo("forgotpassword"){inclusive = true}
+        }
     }
 }

@@ -18,6 +18,7 @@ import com.manoelfreitas.imdmarket.ui.screen.main.item.additem.AddItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.item.edititem.EditItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.item.deleteitem.DeleteItemScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.item.listitems.ListItemScreen
+import com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword.ForgotPasswordScreen
 
 
 
@@ -63,6 +64,9 @@ fun AppNavigation() {
         }
         composable("listitems"){
             ListItemScreen(navController)
+        }
+        composable("forgotpassword"){
+            ForgotPasswordScreen(navController)
         }
     }
 }

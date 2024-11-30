@@ -1,5 +1,6 @@
 package com.manoelfreitas.imdmarket.ui.screen.main.item.additem
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.material3.*
@@ -7,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,6 +22,9 @@ fun AddItemScreen(navController: NavController){
     var productName by remember {(mutableStateOf(""))}
     var productDescription by remember {(mutableStateOf(""))}
     var productQuantity by remember {(mutableStateOf(""))}
+
+    val context = LocalContext.current
+
 
     Scaffold (
         modifier = Modifier
@@ -83,7 +88,9 @@ fun AddItemScreen(navController: NavController){
             Row (modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
-                    onClick = { }) {
+                    onClick = {
+                        Toast.makeText(context, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+                    }) {
                     Text("Cadastrar")
                 }
                 Button(onClick = {

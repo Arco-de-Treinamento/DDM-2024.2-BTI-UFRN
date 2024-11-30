@@ -20,13 +20,12 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddItemScreen(navController: NavController){
-    var productCode by remember {(mutableStateOf(""))}
-    var productName by remember {(mutableStateOf(""))}
-    var productDescription by remember {(mutableStateOf(""))}
-    var productQuantity by remember {(mutableStateOf(""))}
+    var productCode: Int? by remember {(mutableStateOf(0))}
+    var productName: String? by remember {(mutableStateOf(""))}
+    var productDescription: String? by remember {(mutableStateOf(""))}
+    var productQuantity: Int? by remember {(mutableStateOf(0))}
 
     val context = LocalContext.current
-
 
     Scaffold (
         modifier = Modifier
@@ -41,7 +40,6 @@ fun AddItemScreen(navController: NavController){
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-
                 colors = TopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -62,28 +60,32 @@ fun AddItemScreen(navController: NavController){
                 Text(text = "CADASTRAR PRODUTO", fontWeight = FontWeight.Bold, fontSize = 24.sp)
             }
             Spacer(modifier = Modifier.height(28.dp))
-            OutlinedTextField(value = productCode,
-                onValueChange = {productCode = it },
+            OutlinedTextField(value = productCode.toString() ?: "",
+                onValueChange = {
+                    value -> productCode = value.toIntOrNull()
+                },
                 label = {Text("Código do produto:")},
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(value = productName,
+            OutlinedTextField(value = productName ?: "",
                 onValueChange = {productName = it },
                 label = {Text("Nome do Produto:") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(value = productDescription,
+            OutlinedTextField(value = productDescription ?: "",
                 onValueChange = {productDescription = it },
                 label = {Text("Descrição do Produto:") },
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 3
             )
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(value = productQuantity,
-                onValueChange = {productQuantity = it },
+            OutlinedTextField(value = productQuantity.toString() ?: "",
+                onValueChange = {
+                    value -> productQuantity = value.toIntOrNull()
+                },
                 label = {Text("Quantidade em Estoque:") },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -92,10 +94,10 @@ fun AddItemScreen(navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
                     onClick = {
-                        if(productCode.isNotEmpty() &&
-                            productName.isNotEmpty() &&
-                            productDescription.isNotEmpty() &&
-                            productQuantity.isNotEmpty()) {
+                        if(productCode != null &&
+                            productName != null &&
+                            productDescription != null &&
+                            productQuantity != null) {
                             Toast.makeText(
                                 context,
                                 "Item cadastrado com sucesso!",
@@ -112,10 +114,10 @@ fun AddItemScreen(navController: NavController){
                     Text("Cadastrar")
                 }
                 Button(onClick = {
-                    productCode = ""
-                    productName = ""
-                    productDescription = ""
-                    productQuantity = ""
+                    productCode = null
+                    productName = null
+                    productDescription = null
+                    productQuantity = null
                 },
                 ) {
                     Text("Limpar")

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeleteItemScreen(navController: NavController){
-    var productCode by remember {(mutableStateOf(""))}
+    var productCode: Int? by remember {(mutableStateOf(0))}
     val context = LocalContext.current
 
     Scaffold (
@@ -56,8 +56,10 @@ fun DeleteItemScreen(navController: NavController){
                 Text(text = "DELETAR PRODUTO", fontWeight = FontWeight.Bold, fontSize = 24.sp)
             }
             Spacer(modifier = Modifier.height(28.dp))
-            OutlinedTextField(value = productCode,
-                onValueChange = {productCode = it },
+            OutlinedTextField(value = productCode.toString() ?: "",
+                onValueChange = {
+                    value -> productCode = value.toIntOrNull()
+                },
                 label = {Text("Código do produto:")},
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -67,7 +69,7 @@ fun DeleteItemScreen(navController: NavController){
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Button(
                     onClick = {
-                        if(productCode.isNotEmpty()) {
+                        if(productCode != null) {
                             Toast.makeText(
                                 context,
                                 "Item deletado com sucesso!",
@@ -84,7 +86,7 @@ fun DeleteItemScreen(navController: NavController){
                     Text("Deletar")
                 }
                 Button(onClick = {
-                    productCode = ""
+                    productCode = null
                 },
                 ) {
                     Text("Limpar")

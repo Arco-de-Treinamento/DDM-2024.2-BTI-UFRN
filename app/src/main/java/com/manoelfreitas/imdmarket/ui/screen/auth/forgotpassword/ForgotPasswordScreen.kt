@@ -1,6 +1,5 @@
 package com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword
 
-
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,9 +16,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.returnToLogin
-import kotlinx.coroutines.delay
-
+import com.manoelfreitas.imdmarket.ui.navigation.returnToLogin
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

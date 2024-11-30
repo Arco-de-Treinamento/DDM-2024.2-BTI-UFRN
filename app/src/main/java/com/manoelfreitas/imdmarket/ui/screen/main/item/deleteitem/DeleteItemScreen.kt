@@ -19,10 +19,6 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun DeleteItemScreen(navController: NavController){
     var productCode by remember {(mutableStateOf(""))}
-    var productName by remember {(mutableStateOf(""))}
-    var productDescription by remember {(mutableStateOf(""))}
-    var productQuantity by remember {(mutableStateOf(""))}
-
     val context = LocalContext.current
 
     Scaffold (
@@ -75,9 +71,6 @@ fun DeleteItemScreen(navController: NavController){
                 }
                 Button(onClick = {
                     productCode = ""
-                    productName = ""
-                    productDescription = ""
-                    productQuantity = ""
                 },
                 ) {
                     Text("Limpar")

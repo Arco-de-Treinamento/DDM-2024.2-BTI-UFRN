@@ -11,12 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.manoelfreitas.imdmarket.ui.navigation.navigateToMenu
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
@@ -63,13 +67,10 @@ fun LoginScreen(navController: NavController){
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Senha:", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            OutlinedTextField(
+            PasswordTextField(
+                label = "Informe sua senha",
                 value = password,
-                onValueChange = { password = it },
-                label = { Text("Informe sua senha") },
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                modifier = Modifier.fillMaxWidth()
+                onValueChange = { password = it }
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
@@ -108,4 +109,44 @@ fun checkLogin(context: Context, username: String, password: String, navControll
     }
 
     return {}
+}
+
+
+@Composable
+fun PasswordTextField(label: String, value: String, onValueChange: (String) -> Unit) {
+    var showPassword by remember { mutableStateOf(false) }
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth(),
+        value = value,
+        onValueChange = onValueChange,
+        label = {
+            Text(text = label)
+        },
+        visualTransformation = if (showPassword) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+        },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        trailingIcon = {
+            if (showPassword) {
+                IconButton(onClick = { showPassword = false }) {
+                    Icon(
+                        imageVector = Icons.Filled.Visibility,
+                        contentDescription = "hide_password"
+                    )
+                }
+            } else {
+                IconButton(
+                    onClick = { showPassword = true }) {
+                    Icon(
+                        imageVector = Icons.Filled.VisibilityOff,
+                        contentDescription = "show_password"
+                    )
+                }
+            }
+        }
+    )
 }

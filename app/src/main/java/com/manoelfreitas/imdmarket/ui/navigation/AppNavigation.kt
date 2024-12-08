@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword.ForgotPasswordScreen
 import com.manoelfreitas.imdmarket.ui.screen.auth.login.LoginScreen
+import com.manoelfreitas.imdmarket.ui.screen.auth.createaccount.CreateAccountScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.menu.MenuScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.product.addproduct.AddProductScreen
 import com.manoelfreitas.imdmarket.ui.screen.main.product.deleteproduct.DeleteProductScreen
@@ -57,12 +58,21 @@ fun AppNavigation() {
         composable("forgotpassword"){
             ForgotPasswordScreen(navController)
         }
+        composable("createaccount"){
+            CreateAccountScreen(navController)
+        }
     }
 }
 
 fun NavController.navigateToLogin(){
     navigate("login"){
         popUpTo("splash"){inclusive = true}
+    }
+}
+
+fun NavController.navigateToCreateAccount(){
+    navigate("createaccount"){
+        popUpTo("login"){inclusive = true}
     }
 }
 

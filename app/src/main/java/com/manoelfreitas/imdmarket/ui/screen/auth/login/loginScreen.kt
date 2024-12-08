@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
+import com.manoelfreitas.imdmarket.ui.navigation.navigateToCreateAccount
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,6 +96,17 @@ fun LoginScreen(navController: NavController){
                     .clickable {
                     navController.navigate("forgotpassword")
                 }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Não possuo uma conta",
+                color = MaterialTheme.colorScheme.primary,
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .clickable {
+                        navController.navigateToCreateAccount()
+                    }
             )
         }
     }

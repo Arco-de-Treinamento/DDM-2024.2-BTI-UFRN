@@ -70,6 +70,12 @@ fun NavController.navigateToLogin(){
     }
 }
 
+fun NavController.logout(){
+    navigate("login"){
+        popUpTo("menu"){inclusive = true}
+    }
+}
+
 fun NavController.navigateToCreateAccount(){
     navigate("createaccount"){
         popUpTo("login"){inclusive = true}

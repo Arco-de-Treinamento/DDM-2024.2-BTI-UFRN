@@ -16,7 +16,7 @@ class UserDatabaseHelper {
         }
 
         //Por padrao o Room Bloqueia o acesso ao banco de dados na Main Thread.
-        //A implementação correnta iria utilizar o coroutines para isso.
+        //A implementação correta iria utilizar o coroutines para isso.
 
         return userDB!!
     }

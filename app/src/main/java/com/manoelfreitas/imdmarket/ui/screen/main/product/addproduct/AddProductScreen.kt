@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
-import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
+import com.manoelfreitas.imdmarket.product.model.Product
+import com.manoelfreitas.imdmarket.product.viewModel.ProductViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -16,8 +16,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
-import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
+import com.manoelfreitas.imdmarket.product.viewModel.ProductViewModel
+import com.manoelfreitas.imdmarket.product.model.Product
 
 
 @OptIn(ExperimentalMaterial3Api::class)

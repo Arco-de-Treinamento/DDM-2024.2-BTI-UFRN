@@ -26,7 +26,7 @@ import androidx.compose.material3.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.navigation.logout
+import com.manoelfreitas.imdmarket.navigation.logout
 import com.manoelfreitas.imdmarket.ui.screen.auth.login.checkLogin
 
 data class MenuItem(val title: String, val route: String)

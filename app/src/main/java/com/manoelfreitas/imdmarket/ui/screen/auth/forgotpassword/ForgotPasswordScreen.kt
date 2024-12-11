@@ -16,7 +16,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.ui.navigation.returnToLogin
+import com.manoelfreitas.imdmarket.navigation.returnToLogin
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

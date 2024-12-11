@@ -1,6 +1,7 @@
 package com.manoelfreitas.imdmarket.ui.screen.auth.createaccount
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,13 +18,14 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.ui.navigation.navigateToMenu
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.navigation.navigateToLogin
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.manoelfreitas.imdmarket.navigation.navigateToLogin
+import com.manoelfreitas.imdmarket.user.viewModel.UserViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -114,9 +116,16 @@ fun CreateAccountScreen(navController: NavController){
 fun createAccount(context: Context, username: String, password: String, confPassword: String, navController: NavController): () -> Unit {
     if (password == confPassword) {
 
-        //if(criar conta paizao)
-        Toast.makeText(context, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
-        navController.navigateToLogin()
+        try {
+            UserViewModel(context).createUser(username, password)
+            Toast.makeText(context, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+
+            navController.navigateToLogin()
+        } catch (e: Exception) {
+            Toast.makeText(context, "Falha ao criar a conta!", Toast.LENGTH_SHORT).show()
+            Log.e("CreateAccount", "Erro ao criar a conta: ${e.message}")
+        }
+
     } else {
         Toast.makeText(context, "Senhas não conferem!", Toast.LENGTH_SHORT).show()
     }

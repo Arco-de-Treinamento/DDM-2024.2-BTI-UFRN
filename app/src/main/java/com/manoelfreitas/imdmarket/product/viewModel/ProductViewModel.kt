@@ -1,16 +1,11 @@
-package com.manoelfreitas.imdmarket.ui.screen.main.product
+package com.manoelfreitas.imdmarket.product.viewModel
 
 import android.content.Context
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.manoelfreitas.imdmarket.product.model.Product
 
-data class Product(
-    val productCode: Int,
-    val productName: String,
-    val productDescription: String,
-    val productQuantity: Int,
-)
 
 class ProductViewModel : ViewModel() {
     private val _products = mutableStateListOf<Product>()

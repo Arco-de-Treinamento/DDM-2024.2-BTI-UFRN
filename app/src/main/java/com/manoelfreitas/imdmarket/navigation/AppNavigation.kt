@@ -1,4 +1,4 @@
-package com.manoelfreitas.imdmarket.ui.navigation
+package com.manoelfreitas.imdmarket.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

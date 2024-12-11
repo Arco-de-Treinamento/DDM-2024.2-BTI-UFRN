@@ -17,13 +17,14 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.ui.navigation.navigateToMenu
+import com.manoelfreitas.imdmarket.navigation.navigateToMenu
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.navigation.navigateToCreateAccount
+import com.manoelfreitas.imdmarket.navigation.navigateToCreateAccount
+import com.manoelfreitas.imdmarket.user.viewModel.UserViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -113,10 +114,12 @@ fun LoginScreen(navController: NavController){
 }
 
 fun checkLogin(context: Context, username: String, password: String, navController: NavController): () -> Unit {
-    if (username == "admin" && password == "admin") {
-        // Navigate to MenuScreen
+
+    try{
+        UserViewModel(context).userLogin(username, password)
         navController.navigateToMenu()
-    } else {
+        Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
+    } catch (e: Exception) {
         Toast.makeText(context, "Falha ao realizar o login!", Toast.LENGTH_SHORT).show()
     }
 

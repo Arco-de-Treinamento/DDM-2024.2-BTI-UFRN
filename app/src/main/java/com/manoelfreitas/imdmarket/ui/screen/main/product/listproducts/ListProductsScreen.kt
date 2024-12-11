@@ -28,8 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.manoelfreitas.imdmarket.R
-import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
-import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
+import com.manoelfreitas.imdmarket.product.model.Product
+import com.manoelfreitas.imdmarket.product.viewModel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

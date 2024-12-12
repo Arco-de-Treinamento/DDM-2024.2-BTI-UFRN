@@ -28,8 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.manoelfreitas.imdmarket.R
-import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
-import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
+import com.manoelfreitas.imdmarket.product.model.Product
+import com.manoelfreitas.imdmarket.product.viewModel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -116,6 +116,8 @@ fun ProductListItem(product: Product) {
             ) {
                 Text(text = product.productName, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 Text(text = product.productDescription, fontSize = 12.sp, color = Color.Gray)
+                Text(text = product.productCode.toString(), fontSize = 12.sp)
+
             }
         }
     }

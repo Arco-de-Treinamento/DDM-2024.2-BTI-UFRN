@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.manoelfreitas.imdmarket.R
-import com.manoelfreitas.imdmarket.ui.navigation.navigateToLogin
+import com.manoelfreitas.imdmarket.navigation.navigateToLogin
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 

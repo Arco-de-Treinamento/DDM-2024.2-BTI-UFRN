@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +26,9 @@ import androidx.compose.material3.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.manoelfreitas.imdmarket.navigation.logout
+import com.manoelfreitas.imdmarket.ui.screen.auth.login.checkLogin
+import com.manoelfreitas.imdmarket.user.model.User
 
 data class MenuItem(val title: String, val route: String)
 
@@ -37,6 +41,7 @@ fun MenuScreen(navController: NavController){
         MenuItem("Alterar Produto", "edititem"),
         MenuItem("Deletar Produto", "deleteitem")
     )
+
 
     Scaffold (
         modifier = Modifier
@@ -58,32 +63,46 @@ fun MenuScreen(navController: NavController){
     ) { innerPadding ->
         Column (modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(innerPadding)
+            .padding(vertical = 28.dp, horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center){
-            Row (modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center){
-                Text(text = "O que deseja Fazer?", fontWeight = FontWeight.Bold, fontSize = 24.sp)
-            }
-            Spacer(modifier = Modifier.height(48.dp))
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                items(menuItems){
-                    menuItem -> MenuButton(
-                    navController = navController,
-                    title = menuItem.title,
-                    route = menuItem.route)
+            verticalArrangement = Arrangement.SpaceBetween
+            ){
+            Column (
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ){
+                Row (modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center){
+                    Text(text = "O que deseja Fazer?", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+                }
+                Spacer(modifier = Modifier.height(48.dp))
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items(menuItems){
+                            menuItem -> MenuButton(
+                        navController = navController,
+                        title = menuItem.title,
+                        route = menuItem.route)
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(28.dp))
-            Text(
-                text = "IMD Market v1.0.0",
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(4.dp)
-            )
+            Column (
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Button(onClick = {
+                    navController.logout()
+                }) {
+                    Text("Sair")
+                }
+                Text(
+                    text = "IMD Market v2.0.0",
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(4.dp)
+                )
+            }
         }
     }
 }

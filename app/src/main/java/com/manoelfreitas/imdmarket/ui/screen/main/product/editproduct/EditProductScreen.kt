@@ -16,8 +16,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import com.manoelfreitas.imdmarket.ui.screen.main.product.ProductViewModel
-import com.manoelfreitas.imdmarket.ui.screen.main.product.Product
+import com.manoelfreitas.imdmarket.product.viewModel.ProductViewModel
+import com.manoelfreitas.imdmarket.product.model.Product
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -123,28 +123,37 @@ fun EditProductScreen(navController: NavController){
 
 
 fun editProduct(context: Context, productCode: Int?, productName: String?, productDescription: String?, productQuantity: Int?) {
-    if(productCode != null && productName != null &&
-        productDescription != null && productQuantity != null) {
+    if(ProductViewModel().isProductExists(productCode!!)){
+        if(productCode != null && productName != null &&
+            productDescription != null && productQuantity != null) {
 
-        var _product = Product(
-            productCode = productCode,
-            productName = productName,
-            productDescription = productDescription,
-            productQuantity = productQuantity
-        )
+            var _product = Product(
+                productCode = productCode,
+                productName = productName,
+                productDescription = productDescription,
+                productQuantity = productQuantity
+            )
 
-        ProductViewModel().editProduct(_product, context)
+            ProductViewModel().editProduct(_product, context)
 
+            Toast.makeText(
+                context,
+                "Item editado com sucesso!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }else {
+            Toast.makeText(
+                context,
+                "Preencha todos os campos!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    } else {
         Toast.makeText(
             context,
-            "Item editado com sucesso!",
-            Toast.LENGTH_SHORT
-        ).show()
-    }else {
-        Toast.makeText(
-            context,
-            "Preencha todos os campos!",
+            "Esse produto não existe!",
             Toast.LENGTH_SHORT
         ).show()
     }
+
 }

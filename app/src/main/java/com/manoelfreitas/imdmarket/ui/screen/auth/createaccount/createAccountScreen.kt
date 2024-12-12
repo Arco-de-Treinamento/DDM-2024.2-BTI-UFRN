@@ -9,22 +9,15 @@ import androidx.compose.runtime.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.manoelfreitas.imdmarket.navigation.navigateToLogin
+import com.manoelfreitas.imdmarket.ui.components.PasswordTextField
 import com.manoelfreitas.imdmarket.user.viewModel.UserViewModel
 
 
@@ -134,41 +127,3 @@ fun createAccount(context: Context, username: String, password: String, confPass
 }
 
 
-@Composable
-fun PasswordTextField(label: String, value: String, onValueChange: (String) -> Unit) {
-    var showPassword by remember { mutableStateOf(false) }
-
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
-        label = {
-            Text(text = label)
-        },
-        visualTransformation = if (showPassword) {
-            VisualTransformation.None
-        } else {
-            PasswordVisualTransformation()
-        },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        trailingIcon = {
-            if (showPassword) {
-                IconButton(onClick = { showPassword = false }) {
-                    Icon(
-                        imageVector = Icons.Filled.Visibility,
-                        contentDescription = "hide_password"
-                    )
-                }
-            } else {
-                IconButton(
-                    onClick = { showPassword = true }) {
-                    Icon(
-                        imageVector = Icons.Filled.VisibilityOff,
-                        contentDescription = "show_password"
-                    )
-                }
-            }
-        }
-    )
-}

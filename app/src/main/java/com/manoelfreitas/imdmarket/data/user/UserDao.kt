@@ -11,8 +11,11 @@ interface UserDao {
     @Query("SELECT * FROM user")
     fun getAll(): List<User>
 
-    @Query("SELECT * FROM user WHERE user_name LIKE :first LIMIT 1")
-    fun findByName(first: String): User
+    @Query("SELECT * FROM user WHERE user_name LIKE :username LIMIT 1")
+    fun findByName(username: String): User
+
+    @Query("UPDATE user SET password = :newpassword WHERE user_name = :username")
+    fun changePassword(username: String, newpassword: String)
 
     @Insert
     fun insertUser(user: User)

@@ -1,8 +1,9 @@
 package com.manoelfreitas.imdmarket.ui.screen.auth.forgotpassword
 
+import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
@@ -11,21 +12,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.manoelfreitas.imdmarket.navigation.returnToLogin
+import com.manoelfreitas.imdmarket.navigation.navigateToLogin
+import com.manoelfreitas.imdmarket.ui.components.PasswordTextField
+import com.manoelfreitas.imdmarket.user.viewModel.UserViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordScreen(navController: NavController){
-    var username by remember {(mutableStateOf(""))}
-    var email by remember {(mutableStateOf(""))}
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
 
+    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     Scaffold (
         modifier = Modifier
@@ -51,43 +54,68 @@ fun ForgotPasswordScreen(navController: NavController){
             )
         }
     ) { innerPadding ->
-        Column (modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center){
-            Row (modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center){
-                Text(text = "RECUPERAR SENHA", fontWeight = FontWeight.Bold, fontSize = 24.sp)
-            }
-            Spacer(modifier = Modifier.height(28.dp))
-            OutlinedTextField(value = username,
-                onValueChange = {username = it },
-                label = {Text("Usuário:")},
-                modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Usuário:", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("Informe seu usuário") },
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(value = email,
-                onValueChange = {email = it },
-                label = {Text("E-mail:") },
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                visualTransformation = VisualTransformation.None
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = "Senha:", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            PasswordTextField(
+                label = "Informe sua senha",
+                value = password,
+                onValueChange = { password = it }
             )
-
-            Spacer(modifier = Modifier.height(28.dp))
-            Button(
-                onClick = {
-                    if(username.isNotEmpty() || email.isNotEmpty()){
-                        Toast.makeText(context, "Você receberá um e-mail para redefinir sua senha.", Toast.LENGTH_SHORT).show()
-
-                        navController.returnToLogin(scope)
-                    }else{
-                        Toast.makeText(context, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
-                    }
-                }) {
-                Text("Solicitar senha")
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = "Confirme a senha:", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            PasswordTextField(
+                label = "Informe sua senha",
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it }
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = {
+                coroutineScope.launch {
+                    changePassword(
+                        context = context,
+                        username = username,
+                        password = password,
+                        confPassword = confirmPassword,
+                        navController = navController
+                    )
+                }
+            }) {
+                Text("Mudar senha")
             }
         }
     }
+}
+
+fun changePassword(context: Context, username: String, password: String, confPassword: String, navController: NavController): () -> Unit {
+    if (password == confPassword) {
+
+        try {
+            UserViewModel(context).changePassword(username, password)
+            Toast.makeText(context, "Senha alterada com sucesso!", Toast.LENGTH_SHORT).show()
+
+            navController.navigateToLogin()
+        } catch (e: Exception) {
+            Toast.makeText(context, "Falha ao alterar a senha!", Toast.LENGTH_SHORT).show()
+            Log.e("ChangePassword", "Erro ao alterar a senha: ${e.message}")
+        }
+
+    } else {
+        Toast.makeText(context, "Senhas não conferem!", Toast.LENGTH_SHORT).show()
+    }
+
+    return {}
 }

@@ -16,16 +16,18 @@ class UserViewModel (context: Context): UserDao{
         return users
     }
 
-    override fun findByName(first: String): User {
-        val user: User = _userDatabase!!.userDao().findByName(first)
+    override fun findByName(username: String): User {
+        val user: User = _userDatabase!!.userDao().findByName(username)
 
         return user
     }
 
+    override fun changePassword(username: String, newpassword: String) {
+        _userDatabase!!.userDao().changePassword(username, newpassword)
+    }
+
     override fun insertUser(user: User){
-
-            _userDatabase!!.userDao().insertUser(user)
-
+        _userDatabase!!.userDao().insertUser(user)
     }
 
     fun createUser(username: String, password: String): Boolean {

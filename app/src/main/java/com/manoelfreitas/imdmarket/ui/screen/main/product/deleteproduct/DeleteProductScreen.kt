@@ -90,7 +90,7 @@ fun DeleteProductScreen(navController: NavController){
 
 
 fun deleteProduct(context: Context, productCode: Int?) {
-    if(productCode != null) {
+    if(productCode != null && ProductViewModel().isProductExists(productCode)) {
         ProductViewModel().deleteProduct(productCode)
 
         Toast.makeText(
@@ -101,7 +101,7 @@ fun deleteProduct(context: Context, productCode: Int?) {
     }else {
         Toast.makeText(
             context,
-            "Informe o código do produto!",
+            "Informe o código de um produto válido!",
             Toast.LENGTH_SHORT
         ).show()
     }

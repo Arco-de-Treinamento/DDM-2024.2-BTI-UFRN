@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.manoelfreitas.imdmarket.navigation.navigateToCreateAccount
+import com.manoelfreitas.imdmarket.ui.components.PasswordTextField
 import com.manoelfreitas.imdmarket.user.viewModel.UserViewModel
 
 
@@ -126,42 +127,3 @@ fun checkLogin(context: Context, username: String, password: String, navControll
     return {}
 }
 
-
-@Composable
-fun PasswordTextField(label: String, value: String, onValueChange: (String) -> Unit) {
-    var showPassword by remember { mutableStateOf(false) }
-
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
-        label = {
-            Text(text = label)
-        },
-        visualTransformation = if (showPassword) {
-            VisualTransformation.None
-        } else {
-            PasswordVisualTransformation()
-        },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        trailingIcon = {
-            if (showPassword) {
-                IconButton(onClick = { showPassword = false }) {
-                    Icon(
-                        imageVector = Icons.Filled.Visibility,
-                        contentDescription = "hide_password"
-                    )
-                }
-            } else {
-                IconButton(
-                    onClick = { showPassword = true }) {
-                    Icon(
-                        imageVector = Icons.Filled.VisibilityOff,
-                        contentDescription = "show_password"
-                    )
-                }
-            }
-        }
-    )
-}

@@ -41,6 +41,10 @@ class ProductViewModel : ViewModel() {
         return _products
     }
 
+    fun isProductExists(productCode: Int): Boolean {
+        return (_products.isNotEmpty() && _products.any { it.productCode == productCode })
+    }
+
     private fun saveToSharedPreferences(context: Context){
         val sharedPreferences = context.getSharedPreferences("product_data", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.manoelfreitas.imdmarket.navigation.logout
 import com.manoelfreitas.imdmarket.ui.screen.auth.login.checkLogin
+import com.manoelfreitas.imdmarket.user.model.User
 
 data class MenuItem(val title: String, val route: String)
 
@@ -40,6 +41,7 @@ fun MenuScreen(navController: NavController){
         MenuItem("Alterar Produto", "edititem"),
         MenuItem("Deletar Produto", "deleteitem")
     )
+
 
     Scaffold (
         modifier = Modifier
@@ -96,7 +98,7 @@ fun MenuScreen(navController: NavController){
                     Text("Sair")
                 }
                 Text(
-                    text = "IMD Market v1.0.0",
+                    text = "IMD Market v2.0.0",
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(4.dp)
                 )

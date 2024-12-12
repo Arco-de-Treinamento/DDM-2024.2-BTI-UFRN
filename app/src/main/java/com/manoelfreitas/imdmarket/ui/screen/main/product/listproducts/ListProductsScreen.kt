@@ -116,6 +116,8 @@ fun ProductListItem(product: Product) {
             ) {
                 Text(text = product.productName, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 Text(text = product.productDescription, fontSize = 12.sp, color = Color.Gray)
+                Text(text = product.productCode.toString(), fontSize = 12.sp)
+
             }
         }
     }

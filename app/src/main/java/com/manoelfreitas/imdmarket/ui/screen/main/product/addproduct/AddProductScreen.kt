@@ -130,20 +130,27 @@ fun addProduct(context: Context, productViewModel: ProductViewModel,
     if(productCode != null && productName != null &&
         productDescription != null && productQuantity != null) {
 
-        var _product = Product(
-            productCode = productCode,
-            productName = productName,
-            productDescription = productDescription,
-            productQuantity = productQuantity
-        )
+        if (productViewModel.isProductExists(productCode)) {
+            Toast.makeText(
+                context,
+                "Produto já cadastrado!",
+                Toast.LENGTH_SHORT).show()
+        }else{
+            var _product = Product(
+                productCode = productCode,
+                productName = productName,
+                productDescription = productDescription,
+                productQuantity = productQuantity
+            )
 
-        productViewModel.addProduct(_product, context)
+            productViewModel.addProduct(_product, context)
 
-        Toast.makeText(
-            context,
-            "Item cadastrado com sucesso!",
-            Toast.LENGTH_SHORT
-        ).show()
+            Toast.makeText(
+                context,
+                "Item cadastrado com sucesso!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }else {
         Toast.makeText(
             context,
@@ -152,4 +159,3 @@ fun addProduct(context: Context, productViewModel: ProductViewModel,
         ).show()
     }
 }
-
